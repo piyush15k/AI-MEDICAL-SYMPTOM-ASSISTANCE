@@ -1,4 +1,5 @@
 import type { PossibleCondition } from '../types/medical.types'
+import RemedyList from './RemedyList'
 
 const likelihoodStyles: Record<string, string> = {
   high: 'bg-red-100 text-red-700',
@@ -6,7 +7,11 @@ const likelihoodStyles: Record<string, string> = {
   low: 'bg-slate-100 text-slate-700',
 }
 
-const ResultCard = ({ name, likelihood, description }: PossibleCondition) => {
+interface ResultCardProps extends PossibleCondition {
+  remedies: string[]
+}
+
+const ResultCard = ({ name, likelihood, description, remedies }: ResultCardProps) => {
   return (
     <div className="bg-white rounded-lg border border-slate-200 p-4">
       <div className="flex items-center justify-between mb-2">
@@ -16,6 +21,7 @@ const ResultCard = ({ name, likelihood, description }: PossibleCondition) => {
         </span>
       </div>
       <p className="text-sm text-slate-600">{description}</p>
+      <RemedyList remedies={remedies} />
     </div>
   )
 }
